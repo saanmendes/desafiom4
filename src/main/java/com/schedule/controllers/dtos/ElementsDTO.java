@@ -6,8 +6,6 @@ import java.util.Date;
 public class ElementsDTO {
 
     private String id;
-    private String nameOfTheEvent;
-    private String description;
     private Date entryTime;
     private Date exitTime;
     private Time startTime;
@@ -24,23 +22,6 @@ public class ElementsDTO {
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getNameOfTheEvent() {
-        return nameOfTheEvent;
-    }
-
-    public void setNameOfTheEvent(String nameOfTheEvent) {
-        this.nameOfTheEvent = nameOfTheEvent;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Date getEntryTime() {
         return entryTime;
     }
