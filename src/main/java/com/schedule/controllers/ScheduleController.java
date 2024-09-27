@@ -48,16 +48,20 @@ public class ScheduleController {
         return ResponseEntity.notFound().build();
     }
 
+  @GetMapping("/eventos")
+    public ResponseEntity<List<ElementsDTO>> getEvents(@RequestParam(required = false) Integer dias) {
+        List<ElementsDTO> events;
+
+        if (dias == null) {
+            events = scheduleService.getFutureEvents();
+            return ResponseEntity.ok(events);
+        }
+        events = scheduleService.getEventsWithinPeriod(dias);
+        return ResponseEntity.ok(events);
+    }
 
     private List<String> validateEvent(ElementsDTO elementsDTO) {
         List<String> errors = new ArrayList<>();
-
-        if ( elementsDTO.getNameOfTheEvent().isEmpty()) {
-            errors.add("O nome do evento é obrigatório.");
-        }
-        if (elementsDTO.getDescription().isEmpty()) {
-            errors.add("A descrição é obrigatória.");
-        }
         if (elementsDTO.getEntryTime() == null) {
             errors.add("A data de início é obrigatória.");
         }
@@ -70,5 +74,16 @@ public class ScheduleController {
         return errors;
     }
 
+    private List<String> validateEvents(EventDTO eventDTO) {
+        List<String> errors = new ArrayList<>();
+
+        if (eventDTO.getNameOfTheEvent().isEmpty()) {
+            errors.add("O nome do evento é obrigatório.");
+        }
+        if (eventDTO.getDescription().isEmpty()) {
+            errors.add("A descrição é obrigatória.");
+        }
+        return errors;
+    }
 }
 
